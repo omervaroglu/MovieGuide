@@ -8,25 +8,21 @@
 
 import Foundation
 
-public struct Movies: Codable {
-     public var results : [Result]
+public struct Movies: Decodable {
+    public var results : [Result]
     
     init (results: [Result]) {
         self.results = results
     }
 }
 
-public struct Result: Codable {
-     public var vote_average : Double
-     public var title : String
-     public var poster_path : String
+public struct Result: Decodable {
+     public var vote_average : [Double]
+     public var title : [String]
     
-    init (vote_average : Double, title : String, poster_path: String) {
+     init (vote_average : [Double], title : [String]) {
         self.vote_average = vote_average
         self.title = title
-        self.poster_path = poster_path
-
-    }
-    
+     }
 }
 

@@ -10,12 +10,8 @@ import Foundation
 
 
 class MovieGuideModel {
-    
-    var movieList = Movies(results: [])
-    var resultList = Result(vote_average: 1.0, title: "", poster_path: "")
-    
-    
     func getData(moviesType : String, boolentype : Bool ) {
+        
         var dataType = ""
         
         if boolentype == true {
@@ -25,28 +21,36 @@ class MovieGuideModel {
         }
         
         let baseURL = "https://api.themoviedb.org/3"
-        let key = "/?api_key=f7dea668cf80a25035af6e29f6e05c5e"
+        let key = "?api_key=f7dea668cf80a25035af6e29f6e05c5e"
         
         let newURL = baseURL + dataType + moviesType + key
         let url = URL(string: newURL)!
         let data = try! Data(contentsOf: url)
+        
         let decoder = JSONDecoder()
         
-        guard let movies = try? decoder.decode(Movies.self, from: data) else {
-            print("error")
-            return
+//        guard let movies = try? decoder.decode(Movies.self, from: data) else {
+//            print("error007")
+//            return
+//        }
+        do {
+            let movies = try decoder.decode(Movies.self, from: data)
+            print(movies.results)
+            
+            self.movieList.results = movies.results
+            
+            for result in movies.results {
+                self.resultList.title.append(contentsOf: result.title)
+                self.resultList.vote_average.append(contentsOf: result.vote_average)
+            }
+            
+        }catch {
+            print(error)
         }
         
-        print(movies.results)
-        self.movieList = movies
-        for result in movies.results {
-            print(result.title)
-            self.resultList = result
-        }
-        
-// iceride dondurdugun veriyi controllerda nasil gosterceksin
-        
-        
+
     }
 
+    var movieList = Movies(results: [])
+    var resultList  = Result(vote_average: [], title: [])
 }
