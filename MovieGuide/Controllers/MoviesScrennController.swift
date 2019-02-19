@@ -17,7 +17,7 @@ class MoviesScreenController: BaseViewController, UITableViewDelegate, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(modelMovie.movieArray)
+        print(modelMovie.movieList.results)
         
         tableView.delegate = self
         tableView.dataSource = self

@@ -11,12 +11,9 @@ import Foundation
 
 class MovieGuideModel {
     
-    var movieArray : result
+    var movieList = Movies(results: [])
+    var resultList = Result(vote_average: 1.0, title: "", poster_path: "")
     
-     init() {
-        movieArray =  as result
-        //yukarida olusturdugumuz modeli tutmak icin gerekli olan initilazation islemi
-    }
     
     func getData(moviesType : String, boolentype : Bool ) {
         var dataType = ""
@@ -35,11 +32,21 @@ class MovieGuideModel {
         let data = try! Data(contentsOf: url)
         let decoder = JSONDecoder()
         
-        var movie = try! decoder.decode(result.self, from: data)
-        movie = self.movieArray
+        guard let movies = try? decoder.decode(Movies.self, from: data) else {
+            print("error")
+            return
+        }
+        
+        print(movies.results)
+        self.movieList = movies
+        for result in movies.results {
+            print(result.title)
+            self.resultList = result
+        }
+        
+// iceride dondurdugun veriyi controllerda nasil gosterceksin
+        
+        
     }
 
 }
-
-
-// resulti istenen tipte bu sayfada belirtilmesi gerekiyor.
