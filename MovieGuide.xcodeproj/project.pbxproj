@@ -14,6 +14,7 @@
 		172CC2FE2200A6F1009A4137 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 172CC2FD2200A6F1009A4137 /* Assets.xcassets */; };
 		172CC3012200A6F1009A4137 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 172CC2FF2200A6F1009A4137 /* LaunchScreen.storyboard */; };
 		172CC30D2200A7CE009A4137 /* MoviesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172CC30C2200A7CE009A4137 /* MoviesModel.swift */; };
+		173998FD221ADC2B006CAFC8 /* MovieGuideModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173998FC221ADC2B006CAFC8 /* MovieGuideModel.swift */; };
 		17706CC92216E58200948351 /* tab-movies-selected.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 17706CC32216E58200948351 /* tab-movies-selected.pdf */; };
 		17706CCA2216E58200948351 /* tab-profile.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 17706CC42216E58200948351 /* tab-profile.pdf */; };
 		17706CCB2216E58200948351 /* tab-profile-selected.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 17706CC52216E58200948351 /* tab-profile-selected.pdf */; };
@@ -33,6 +34,7 @@
 		172CC3002200A6F1009A4137 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		172CC3022200A6F1009A4137 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		172CC30C2200A7CE009A4137 /* MoviesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesModel.swift; sourceTree = "<group>"; };
+		173998FC221ADC2B006CAFC8 /* MovieGuideModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGuideModel.swift; sourceTree = "<group>"; };
 		17706CC32216E58200948351 /* tab-movies-selected.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "tab-movies-selected.pdf"; sourceTree = "<group>"; };
 		17706CC42216E58200948351 /* tab-profile.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "tab-profile.pdf"; sourceTree = "<group>"; };
 		17706CC52216E58200948351 /* tab-profile-selected.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "tab-profile-selected.pdf"; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				172CC30C2200A7CE009A4137 /* MoviesModel.swift */,
+				173998FC221ADC2B006CAFC8 /* MovieGuideModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 				172CC30D2200A7CE009A4137 /* MoviesModel.swift in Sources */,
 				172CC2F62200A6EF009A4137 /* BaseViewController.swift in Sources */,
 				172CC2F42200A6EF009A4137 /* AppDelegate.swift in Sources */,
+				173998FD221ADC2B006CAFC8 /* MovieGuideModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

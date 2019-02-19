@@ -9,12 +9,15 @@
 import UIKit
 import Foundation
 
-class MoviesScreenController: BaseViewController , UITableViewDelegate, UITableViewDataSource {
+class MoviesScreenController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
     
+    var modelMovie = MovieGuideModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(modelMovie.movieArray)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -31,7 +34,8 @@ class MoviesScreenController: BaseViewController , UITableViewDelegate, UITableV
     }
     
     func listData () {
-        getData(moviesType: "popular", boolentype: true)
+        self.modelMovie.getData(moviesType: "popular", boolentype: true)
+        
     }
 
     

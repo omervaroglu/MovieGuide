@@ -15,41 +15,39 @@ import UIKit
 
 class BaseViewController: UIViewController {
 
-    var popularMovie = Movies(resultList: result)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(popularMovie)
     }
     
-    func getData(moviesType : String, boolentype : Bool ) {
-        var dataType = ""
-        
-        if boolentype == true {
-            dataType = "movie"
-        }else {
-            dataType = "tv"
-        }
-         
-        let baseURL = "https://api.themoviedb.org/3/"
-        let key = "?api_key=f7dea668cf80a25035af6e29f6e05c5e"
-        
-        let newURL = baseURL + dataType + moviesType + key
-        let url = URL(string: newURL)
-        let data = try! Data(contentsOf: url!)
-        let decoder = JSONDecoder()
-        
-        do {
-            var movie = try decoder.decode(Movies.self, from: data)
-            var resultMovie = try decoder.decode(result.self, from: data)
-            resultMovie = popularMovie
-            print(movie.results)
-            
-        } catch {
-            print(error)
-        }
-        print(popularMovie)
-        
-    }
+//    func getData(moviesType : String, boolentype : Bool ) {
+//        var dataType = ""
+//
+//        if boolentype == true {
+//            dataType = "movie"
+//        }else {
+//            dataType = "tv"
+//        }
+//
+//        let baseURL = "https://api.themoviedb.org/3/"
+//        let key = "?api_key=f7dea668cf80a25035af6e29f6e05c5e"
+//
+//        let newURL = baseURL + dataType + moviesType + key
+//        let url = URL(string: newURL)
+//        let data = try! Data(contentsOf: url!)
+//        let decoder = JSONDecoder()
+//
+//        do {
+//            var movie = try decoder.decode(Movies.self, from: data)
+//            var resultMovie = try decoder.decode(result.self, from: data)
+//            resultMovie = popularMovie
+//            print(movie.results)
+//
+//        } catch {
+//            print(error)
+//        }
+//        print(popularMovie)
+//
+//    }
 }
 
