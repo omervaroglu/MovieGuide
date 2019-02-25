@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "687EA8D7151BE59BD5FD49FE8825C57A"
-               BuildableName = "Pods_MovieGuide.framework"
-               BlueprintName = "Pods-MovieGuide"
+               BlueprintIdentifier = "9480427EE661E1D6FF6047F6D31801C6"
+               BuildableName = "PKHUDResources.bundle"
+               BlueprintName = "PKHUD-PKHUDResources"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "687EA8D7151BE59BD5FD49FE8825C57A"
-            BuildableName = "Pods_MovieGuide.framework"
-            BlueprintName = "Pods-MovieGuide"
+            BlueprintIdentifier = "9480427EE661E1D6FF6047F6D31801C6"
+            BuildableName = "PKHUDResources.bundle"
+            BlueprintName = "PKHUD-PKHUDResources"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

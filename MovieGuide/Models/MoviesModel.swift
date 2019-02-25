@@ -7,22 +7,38 @@
 //
 
 import Foundation
+import ObjectMapper
 
-public struct Movies: Decodable {
-    public var results : [Result]
+public struct Movies: Mappable {
     
-    init (results: [Result]) {
-        self.results = results
+    public var results : [Result]?
+    public var page : Int?
+    
+    public init?(map: Map) {
+        
     }
+    
+    public mutating func mapping(map: Map) {
+        results <- map["result"]
+        page <- map["page"]
+    }
+
 }
 
-public struct Result: Decodable {
-     public var vote_average : [Double]
-     public var title : [String]
+public struct Result: Mappable {
     
-     init (vote_average : [Double], title : [String]) {
-        self.vote_average = vote_average
-        self.title = title
-     }
+    public var vote_average : [Double]?
+    public var title : [String]?
+    
+    public init?(map: Map) {
+
+    }
+    
+    public mutating func mapping(map: Map) {
+        vote_average <- map["vote_avarage"]
+        title <- map["title"]
+    }
+
+
 }
 
