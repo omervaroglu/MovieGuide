@@ -10,6 +10,10 @@ import Foundation
 
 
 class MovieGuideModel {
+    
+    var movieList: [Movies] = []
+    var resultList  = Result(vote_average: [], title: [])
+    
     func getData(moviesType : String, boolentype : Bool ) {
         
         var dataType = ""
@@ -33,15 +37,16 @@ class MovieGuideModel {
 //            print("error007")
 //            return
 //        }
+        
         do {
             let movies = try decoder.decode(Movies.self, from: data)
             print(movies.results)
             
-            self.movieList.results = movies.results
+            self.movieList = [movies]
             
             for result in movies.results {
                 self.resultList.title.append(contentsOf: result.title)
-                self.resultList.vote_average.append(contentsOf: result.vote_average)
+               // self.resultList.vote_average.append(result.vote_average)
             }
             
         }catch {
@@ -51,6 +56,4 @@ class MovieGuideModel {
 
     }
 
-    var movieList = Movies(results: [])
-    var resultList  = Result(vote_average: [], title: [])
 }

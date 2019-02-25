@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-class MoviesScreenController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class MoviesScreenController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -18,10 +18,17 @@ class MoviesScreenController: BaseViewController, UITableViewDelegate, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         listData()
+ 
         tableView.delegate = self
         tableView.dataSource = self
     }
     
+
+
+    
+}
+
+extension MoviesScreenController:  UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
@@ -36,6 +43,4 @@ class MoviesScreenController: BaseViewController, UITableViewDelegate, UITableVi
         self.modelMovie.getData(moviesType: "popular", boolentype: true)
         
     }
-
-    
 }
