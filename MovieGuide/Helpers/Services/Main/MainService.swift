@@ -18,11 +18,11 @@ class MainService: NSObject {
         return instance
     }()
     
-    func getTopRatedMovies( completion: @escaping( _ categoryresponse: Movies?, _ error: String?) -> ()) {
-        NetworkManager.sharedInstance.request(url: Constants.getPath(path: "popular/top_rated"), method: .post, parameters: nil, encoding: JSONEncoding.default, headers: nil) { code, responseJson, error in
+    func getTopRatedMovies( completion: @escaping( _ categoryresponse: BaseMovieModel?, _ error: String?) -> ()) {
+        NetworkManager.sharedInstance.request(url: Constants.getPath(path: "movie/top_rated"), method: .post, parameters: nil, encoding: JSONEncoding.default, headers: nil) { code, responseJson, error in
             if error == nil {
                 if let json = responseJson {
-                    let response = Mapper<Movies>().map(JSONObject: json.dictionaryObject)
+                    let response = Mapper<BaseMovieModel>().map(JSONObject: json.dictionaryObject)
                     if let response = response, response.page == 1 {
                         completion(response, nil)
                     }else {

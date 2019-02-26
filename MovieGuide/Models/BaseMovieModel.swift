@@ -18,7 +18,7 @@ struct BaseMovieModel : Mappable {
 	var page : Int?
 	var total_results : Int?
 	var total_pages : Int?
-	var results : [Movie]?
+	var movies : [Movie]?
 
 	init?(map: Map) {
 
@@ -29,7 +29,7 @@ struct BaseMovieModel : Mappable {
 		page <- map["page"]
 		total_results <- map["total_results"]
 		total_pages <- map["total_pages"]
-		results <- map["results"]
+		movies <- map["results"]
 	}
 
 }

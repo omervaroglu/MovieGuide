@@ -10,4 +10,5 @@ target 'MovieGuide' do
   pod 'SwiftyJSON', '~> 4.0'
   pod 'ObjectMapper', '~> 3.4'
   pod 'PKHUD', '~> 5.1'
+  pod 'Kingfisher', '4.10.0'
 end
