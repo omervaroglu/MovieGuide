@@ -18,9 +18,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="408" height="194.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="xM9-94-x1N">
-                        <rect key="frame" x="0.0" y="0.0" width="408" height="195"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="xM9-94-x1N">
+                        <rect key="frame" x="0.0" y="0.0" width="408" height="194.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="NCk-3t-ASE">
                             <size key="itemSize" width="50" height="50"/>
@@ -30,6 +29,12 @@
                         </collectionViewFlowLayout>
                     </collectionView>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="xM9-94-x1N" secondAttribute="trailing" id="KMe-W4-T91"/>
+                    <constraint firstItem="xM9-94-x1N" firstAttribute="top" secondItem="eu6-8m-cDA" secondAttribute="top" id="Nfm-JG-5sL"/>
+                    <constraint firstAttribute="bottom" secondItem="xM9-94-x1N" secondAttribute="bottom" id="gGQ-hq-MGP"/>
+                    <constraint firstItem="xM9-94-x1N" firstAttribute="leading" secondItem="eu6-8m-cDA" secondAttribute="leading" id="xB8-Ae-ERr"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="topRatedCollectionView" destination="xM9-94-x1N" id="dqA-7t-CcY"/>

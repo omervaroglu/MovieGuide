@@ -29,7 +29,6 @@
                 <constraint firstAttribute="bottom" secondItem="Nzt-Jg-zmf" secondAttribute="bottom" id="51f-WJ-ipE"/>
                 <constraint firstItem="Nzt-Jg-zmf" firstAttribute="top" secondItem="i0i-na-56i" secondAttribute="top" id="Sbd-M2-cct"/>
                 <constraint firstItem="Nzt-Jg-zmf" firstAttribute="leading" secondItem="i0i-na-56i" secondAttribute="leading" constant="16" id="nPP-5H-ReM"/>
-                <constraint firstItem="Nzt-Jg-zmf" firstAttribute="leading" secondItem="i0i-na-56i" secondAttribute="leading" constant="16" id="yNt-pk-ViR"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="nll-1R-Ij9"/>
             <size key="customSize" width="302" height="121"/>

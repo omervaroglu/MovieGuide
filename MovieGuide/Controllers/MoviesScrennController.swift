@@ -90,9 +90,9 @@ extension MoviesScreenController: UICollectionViewDelegate, UICollectionViewData
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = self.view.frame.width-40
+        let width = self.view.frame.width-60
         let height = width*281/500
-        return CGSize(width: width, height: height)
+        return CGSize(width: width+16, height: height)
     }
     
 }
