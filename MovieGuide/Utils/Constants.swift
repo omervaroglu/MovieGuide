@@ -11,11 +11,15 @@ import UIKit
 
 @objc public class Constants: NSObject {
     
-    static let baseUrl = "https://api.themoviedb.org/3/movie/popular?api_key=f7dea668cf80a25035af6e29f6e05c5e"
-    //static let apiKey = "?api_key=f7dea668cf80a25035af6e29f6e05c5e"
+    static let baseUrl = "https://api.themoviedb.org/3/"
+    
+    static let apiKey = "f7dea668cf80a25035af6e29f6e05c5e"
     
     static var udid = UIDevice.current.identifierForVendor!.uuidString
 
+    static func getPath(path: String) -> String {
+        return baseUrl+path+"?api_key=\(apiKey)"
+    }
     
     static func getDefaultHeaders()-> [String:String]{
         return [

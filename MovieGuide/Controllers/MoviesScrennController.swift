@@ -14,7 +14,7 @@ class MoviesScreenController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var moviesList = [Result]() {
+    var moviesList = [Movie]() {
         didSet {
             tableView.reloadData()
         }
@@ -22,17 +22,18 @@ class MoviesScreenController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
- 
-        tableView.delegate = self
-        tableView.dataSource = self
-        
         getMoviesList()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
     }
     
     func getMoviesList() {
         MainService.sharedInstance.getTopRatedMovies(completion: {(moviesResponse, error) in
-            if error != nil {
-                self.moviesList = moviesResponse!.results ?? []
+            if error == nil {
+                self.moviesList = moviesResponse!.movies ?? []
                 print("dustu")
             }else {
                 let alert = UIAlertController(title: "HATA", message: error, preferredStyle: UIAlertController.Style.alert)
@@ -47,17 +48,19 @@ class MoviesScreenController: BaseViewController {
 }
 
 extension MoviesScreenController:  UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return moviesList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = UITableViewCell()
-//        cell.textLabel?.numberOfLines = "\(moviesList.toJSONString())"
+        let cell = tableView.dequeueReusableCell(withIdentifier: "movieCell", for: indexPath)
+        cell.textLabel?.text = "\(moviesList[indexPath.row].title ?? "")"
+        
         return cell
-        
-        //cell i listeleyebil.
-        
     }
     
 }

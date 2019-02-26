@@ -11,7 +11,7 @@ import ObjectMapper
 
 public struct Movies: Mappable {
     
-    public var results : [Result]?
+    public var movies : [Movie]?
     public var page : Int?
     
     public init?(map: Map) {
@@ -19,16 +19,16 @@ public struct Movies: Mappable {
     }
     
     public mutating func mapping(map: Map) {
-        results <- map["result"]
+        movies <- map["results"]
         page <- map["page"]
     }
 
 }
 
-public struct Result: Mappable {
+public struct Movie: Mappable {
     
-    public var vote_average : [Double]?
-    public var title : [String]?
+    public var vote_average : Double?
+    public var title : String?
     
     public init?(map: Map) {
 
