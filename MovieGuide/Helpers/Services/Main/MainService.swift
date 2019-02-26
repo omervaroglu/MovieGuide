@@ -7,3 +7,35 @@
 //
 
 import Foundation
+import Alamofire
+import SwiftyJSON
+import ObjectMapper
+
+class MainService: NSObject {
+    
+    static let sharedInstance: MainService = {
+        let instance = MainService()
+        return instance
+    }()
+    
+    func getTopRatedMovies( completion: @escaping( _ categoryresponse: Movies?, _ error: String?) -> ()) {
+        NetworkManager.sharedInstance.request(url: Constants.getPath(path: "popular/top_rated"), method: .post, parameters: nil, encoding: JSONEncoding.default, headers: nil) { code, responseJson, error in
+            if error == nil {
+                if let json = responseJson {
+                    let response = Mapper<Movies>().map(JSONObject: json.dictionaryObject)
+                    if let response = response, response.page == 1 {
+                        completion(response, nil)
+                    }else {
+                        completion(nil, "sunucuda bir hata olustu")
+                    }
+                }else {
+                    completion(nil, "sunucuda bir hata olustu.")
+                }
+                
+            }else {
+                completion(nil, (error?.localizedDescription)!)
+            }
+            
+        }
+    }
+}

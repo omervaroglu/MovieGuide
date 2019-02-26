@@ -8,39 +8,59 @@
 
 import UIKit
 import Foundation
+import PKHUD
 
 class MoviesScreenController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var modelMovie = MovieGuideModel()
+    var moviesList = [Movie]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        listData()
- 
-        tableView.delegate = self
-        tableView.dataSource = self
+        getMoviesList()
+        
     }
     
-
-
+    override func viewWillAppear(_ animated: Bool) {
+        
+    }
+    
+    func getMoviesList() {
+        MainService.sharedInstance.getTopRatedMovies(completion: {(moviesResponse, error) in
+            if error == nil {
+                self.moviesList = moviesResponse!.movies ?? []
+                print("dustu")
+            }else {
+                let alert = UIAlertController(title: "HATA", message: error, preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                    NSLog("click the 'OK'")
+                }))
+                self.present(alert, animated: true, completion: nil)
+            }
+        })
+    }
     
 }
 
 extension MoviesScreenController:  UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return moviesList.count
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.numberOfLines = 1
+        let cell = tableView.dequeueReusableCell(withIdentifier: "movieCell", for: indexPath)
+        cell.textLabel?.text = "\(moviesList[indexPath.row].title ?? "")"
+        
         return cell
     }
     
-    func listData () {
-        self.modelMovie.getData(moviesType: "popular", boolentype: true)
-        
-    }
 }
