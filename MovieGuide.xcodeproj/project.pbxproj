@@ -21,6 +21,11 @@
 		17AA5A6E22256A7D00599BE2 /* TopRatedCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17AA5A6D22256A7D00599BE2 /* TopRatedCollectionCell.xib */; };
 		17AA5A7022256AF300599BE2 /* TopRatedCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AA5A6F22256AF300599BE2 /* TopRatedCollectionCell.swift */; };
 		17AA5A7322257FD800599BE2 /* MovieImageVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AA5A7222257FD800599BE2 /* MovieImageVIew.swift */; };
+		17AA5A752227C70200599BE2 /* PopularMoviesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17AA5A742227C70200599BE2 /* PopularMoviesCell.xib */; };
+		17AA5A772227C7AA00599BE2 /* PopularMoviesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AA5A762227C7AA00599BE2 /* PopularMoviesCell.swift */; };
+		17AA5A792227C92B00599BE2 /* PopularMoviesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17AA5A782227C92B00599BE2 /* PopularMoviesCollectionViewCell.xib */; };
+		17AA5A7B2227CB0B00599BE2 /* PopularMoviesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AA5A7A2227CB0B00599BE2 /* PopularMoviesCollectionViewCell.swift */; };
+		17AA5A7D22281C8800599BE2 /* MoviesDetailScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AA5A7C22281C8800599BE2 /* MoviesDetailScreenController.swift */; };
 		17F5D9D022203A9300C2F5E7 /* MainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F5D9CF22203A9300C2F5E7 /* MainService.swift */; };
 		17F5D9D322203B1C00C2F5E7 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F5D9D222203B1C00C2F5E7 /* NetworkManager.swift */; };
 		17F5D9D52220400D00C2F5E7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F5D9D42220400D00C2F5E7 /* Constants.swift */; };
@@ -46,6 +51,11 @@
 		17AA5A6D22256A7D00599BE2 /* TopRatedCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopRatedCollectionCell.xib; sourceTree = "<group>"; };
 		17AA5A6F22256AF300599BE2 /* TopRatedCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRatedCollectionCell.swift; sourceTree = "<group>"; };
 		17AA5A7222257FD800599BE2 /* MovieImageVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieImageVIew.swift; sourceTree = "<group>"; };
+		17AA5A742227C70200599BE2 /* PopularMoviesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopularMoviesCell.xib; sourceTree = "<group>"; };
+		17AA5A762227C7AA00599BE2 /* PopularMoviesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesCell.swift; sourceTree = "<group>"; };
+		17AA5A782227C92B00599BE2 /* PopularMoviesCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopularMoviesCollectionViewCell.xib; sourceTree = "<group>"; };
+		17AA5A7A2227CB0B00599BE2 /* PopularMoviesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesCollectionViewCell.swift; sourceTree = "<group>"; };
+		17AA5A7C22281C8800599BE2 /* MoviesDetailScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesDetailScreenController.swift; sourceTree = "<group>"; };
 		17F5D9CF22203A9300C2F5E7 /* MainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainService.swift; sourceTree = "<group>"; };
 		17F5D9D222203B1C00C2F5E7 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		17F5D9D42220400D00C2F5E7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -109,6 +119,7 @@
 				177AA11822031A2F00231FA9 /* MoviesScrennController.swift */,
 				172CC2F52200A6EF009A4137 /* BaseViewController.swift */,
 				17AA5A6B22256A3D00599BE2 /* TopRated */,
+				17AA5A7C22281C8800599BE2 /* MoviesDetailScreenController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -128,6 +139,8 @@
 				17AA5A6C22256A4E00599BE2 /* CollectionCell */,
 				1791EAD822255A6100A39070 /* TopRatedMovieCell.swift */,
 				1791EADA22255A8100A39070 /* TopRatedMovieCell.xib */,
+				17AA5A762227C7AA00599BE2 /* PopularMoviesCell.swift */,
+				17AA5A742227C70200599BE2 /* PopularMoviesCell.xib */,
 			);
 			path = TopRated;
 			sourceTree = "<group>";
@@ -137,6 +150,8 @@
 			children = (
 				17AA5A6D22256A7D00599BE2 /* TopRatedCollectionCell.xib */,
 				17AA5A6F22256AF300599BE2 /* TopRatedCollectionCell.swift */,
+				17AA5A782227C92B00599BE2 /* PopularMoviesCollectionViewCell.xib */,
+				17AA5A7A2227CB0B00599BE2 /* PopularMoviesCollectionViewCell.swift */,
 			);
 			path = CollectionCell;
 			sourceTree = "<group>";
@@ -264,6 +279,8 @@
 			files = (
 				17AA5A6E22256A7D00599BE2 /* TopRatedCollectionCell.xib in Resources */,
 				172CC3012200A6F1009A4137 /* LaunchScreen.storyboard in Resources */,
+				17AA5A752227C70200599BE2 /* PopularMoviesCell.xib in Resources */,
+				17AA5A792227C92B00599BE2 /* PopularMoviesCollectionViewCell.xib in Resources */,
 				1791EADB22255A8100A39070 /* TopRatedMovieCell.xib in Resources */,
 				172CC2FE2200A6F1009A4137 /* Assets.xcassets in Resources */,
 				172CC2F92200A6EF009A4137 /* Main.storyboard in Resources */,
@@ -333,6 +350,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				17F5D9D022203A9300C2F5E7 /* MainService.swift in Sources */,
+				17AA5A772227C7AA00599BE2 /* PopularMoviesCell.swift in Sources */,
+				17AA5A7D22281C8800599BE2 /* MoviesDetailScreenController.swift in Sources */,
 				177AA11922031A2F00231FA9 /* MoviesScrennController.swift in Sources */,
 				17F5D9D52220400D00C2F5E7 /* Constants.swift in Sources */,
 				172CC2FC2200A6EF009A4137 /* MovieGuide.xcdatamodeld in Sources */,
@@ -341,6 +360,7 @@
 				1791EAD922255A6100A39070 /* TopRatedMovieCell.swift in Sources */,
 				17F5D9D72223F84A00C2F5E7 /* Utils.swift in Sources */,
 				17AA5A7022256AF300599BE2 /* TopRatedCollectionCell.swift in Sources */,
+				17AA5A7B2227CB0B00599BE2 /* PopularMoviesCollectionViewCell.swift in Sources */,
 				17F5D9D322203B1C00C2F5E7 /* NetworkManager.swift in Sources */,
 				172CC2F62200A6EF009A4137 /* BaseViewController.swift in Sources */,
 				1791EAD722252B6500A39070 /* Movie.swift in Sources */,

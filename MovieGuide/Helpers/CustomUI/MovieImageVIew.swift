@@ -22,6 +22,12 @@ class MovieImageView: UIImageView {
     }
     
     func setup(){
-        layer.cornerRadius = 15
+        layer.cornerRadius = 10
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOffset = CGSize(width: 0, height: 3)
+        layer.shadowRadius = 5
+        layer.shadowOpacity = 1
+        clipsToBounds = true
+
     }
 }

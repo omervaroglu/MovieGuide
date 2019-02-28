@@ -38,4 +38,49 @@ class MainService: NSObject {
             
         }
     }
+    
+    
+    
+    func getPopularMovies( completion: @escaping( _ categoryresponse: BaseMovieModel?, _ error: String?) -> ()) {
+        NetworkManager.sharedInstance.request(url: Constants.getPath(path: "movie/popular"), method: .post, parameters: nil, encoding: JSONEncoding.default, headers: nil) { code, responseJson, error in
+            if error == nil {
+                if let json = responseJson {
+                    let response = Mapper<BaseMovieModel>().map(JSONObject: json.dictionaryObject)
+                    if let response = response, response.page == 1 {
+                        completion(response, nil)
+                    }else {
+                        completion(nil, "sunucuda bir hata olustu")
+                    }
+                }else {
+                    completion(nil, "sunucuda bir hata olustu.")
+                }
+                
+            }else {
+                completion(nil, (error?.localizedDescription)!)
+            }
+            
+        }
+    }
+    
+    func getNowPlayingMovies( completion: @escaping( _ categoryresponse: BaseMovieModel?, _ error: String?) -> ()) {
+        NetworkManager.sharedInstance.request(url: Constants.getPath(path: "movie/now_playing"), method: .post, parameters: nil, encoding: JSONEncoding.default, headers: nil) { code, responseJson, error in
+            if error == nil {
+                if let json = responseJson {
+                    let response = Mapper<BaseMovieModel>().map(JSONObject: json.dictionaryObject)
+                    if let response = response, response.page == 1 {
+                        completion(response, nil)
+                    }else {
+                        completion(nil, "sunucuda bir hata olustu")
+                    }
+                }else {
+                    completion(nil, "sunucuda bir hata olustu.")
+                }
+                
+            }else {
+                completion(nil, (error?.localizedDescription)!)
+            }
+            
+        }
+    }
+
 }
