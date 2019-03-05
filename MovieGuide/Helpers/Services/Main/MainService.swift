@@ -82,5 +82,47 @@ class MainService: NSObject {
             
         }
     }
+    
+    func getMoviesDetail(_ id: Int, completion: @escaping( _ categoryresponse: MovieDetail?, _ error: String?) -> ()) {
+        NetworkManager.sharedInstance.request(url: Constants.getPath(path: "movie/\(id)"), method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil) { code, responseJson, error in
+            if error == nil {
+                if let json = responseJson {
+                    let response = Mapper<MovieDetail>().map(JSONObject: json.dictionaryObject)
+                    if let response = response, response != nil {
+                        completion(response, nil)
+                    }else {
+                        completion(nil, "sunucuda bir hata olustu")
+                    }
+                }else {
+                    completion(nil, "sunucuda bir hata olustu.")
+                }
+                
+            }else {
+                completion(nil, (error?.localizedDescription)!)
+            }
+            
+        }
+    }
+    
+    func getMoviesDetailForCast(_ id: Int, completion: @escaping( _ categoryresponse: MovieCastDetail?, _ error: String?) -> ()) {
+        NetworkManager.sharedInstance.request(url: Constants.getPath(path: "movie/\(id)/credits"), method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil) { code, responseJson, error in
+            if error == nil {
+                if let json = responseJson {
+                    let response = Mapper<MovieCastDetail>().map(JSONObject: json.dictionaryObject)
+                    if let response = response, response != nil  {
+                        completion(response, nil)
+                    }else {
+                        completion(nil, "sunucuda bir hata olustu")
+                    }
+                }else {
+                    completion(nil, "sunucuda bir hata olustu.")
+                }
+                
+            }else {
+                completion(nil, (error?.localizedDescription)!)
+            }
+            
+        }
+    }
 
 }

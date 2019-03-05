@@ -70,6 +70,52 @@
             </objects>
             <point key="canvasLocation" x="1932" y="27.436281859070466"/>
         </scene>
+        <!--Movies Detail Table View Controller-->
+        <scene sceneID="ED8-ge-NdN">
+            <objects>
+                <tableViewController storyboardIdentifier="MoviesDetailTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pOJ-5P-cpM" customClass="MoviesDetailTableViewController" customModule="MovieGuide" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="c5D-ot-dr9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <sections>
+                            <tableViewSection id="XEZ-6s-i72">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="612" id="RPa-M0-oct">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="612"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RPa-M0-oct" id="jli-Uh-cfR">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="611.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rii-4G-ki6" customClass="MovieImageView" customModule="MovieGuide" customModuleProvider="target">
+                                                    <rect key="frame" x="29" y="36" width="174" height="247"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="612" id="zls-Od-EoM">
+                                        <rect key="frame" x="0.0" y="612" width="375" height="612"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zls-Od-EoM" id="yIB-Rr-WRV">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="611.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="pOJ-5P-cpM" id="fZ6-Ig-GzK"/>
+                            <outlet property="delegate" destination="pOJ-5P-cpM" id="Gi4-9N-TRS"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KG5-nn-aTq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2865" y="27"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="6cD-9n-HkP">
             <objects>
@@ -95,6 +141,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="YU6-j7-eyD"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Xb0-pX-Ghf">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>

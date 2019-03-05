@@ -251,7 +251,18 @@ extension MoviesScreenController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: "MoviesScreenController") as! MoviesScreenController
+        let vc = storyboard?.instantiateViewController(withIdentifier: "MoviesDetailTableViewController") as! MoviesDetailTableViewController
+        switch collectionView.tag {
+        case 1:
+            vc.movie = topRatedMovies[indexPath.row]
+        case 2:
+            vc.movie = nowPlayingMovies[indexPath.row]
+        case 3:
+            vc.movie = popularMovies[indexPath.row]
+        default:
+            break
+        }
         self.navigationController?.pushViewController(vc, animated: true)
+
     }
 }
