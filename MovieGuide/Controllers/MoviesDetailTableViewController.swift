@@ -12,10 +12,12 @@ import PKHUD
 import Kingfisher
 
 
-
 class MoviesDetailTableViewController: UITableViewController {
     
+   
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var posterImage: MovieImageView!
+    @IBOutlet weak var backPoster: UIImageView!
     @IBOutlet weak var descriptionLabel: UILabel!
     
     var movie: Movie?
@@ -27,14 +29,21 @@ class MoviesDetailTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
+        statusBar?.backgroundColor = UIColor.clear
+        self.setNeedsStatusBarAppearanceUpdate()
+        
+        self.navigationController?.navigationBar.isHidden = true
         getDetails()
-        
-        
-        
+  
     }
     
     func setUI(){
+        backPoster.kf.setImage(with: URL(string: Constants.imageUrl + (movieDetail?.backdrop_path)!), placeholder: nil, options: [.cacheOriginalImage], progressBlock: nil, completionHandler: nil)
+        
         posterImage.kf.setImage(with: URL(string: Constants.imageUrl + (movieDetail?.poster_path)!), placeholder: nil, options: [.cacheOriginalImage] , progressBlock: nil, completionHandler: nil)
+        
         descriptionLabel.text = movieDetail?.overview
     }
     
