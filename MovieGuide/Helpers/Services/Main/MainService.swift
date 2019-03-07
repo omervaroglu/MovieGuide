@@ -31,15 +31,11 @@ class MainService: NSObject {
                 }else {
                     completion(nil, "sunucuda bir hata olustu.")
                 }
-                
             }else {
                 completion(nil, (error?.localizedDescription)!)
             }
-            
         }
     }
-    
-    
     
     func getPopularMovies( completion: @escaping( _ categoryresponse: BaseMovieModel?, _ error: String?) -> ()) {
         NetworkManager.sharedInstance.request(url: Constants.getPath(path: "movie/popular"), method: .post, parameters: nil, encoding: JSONEncoding.default, headers: nil) { code, responseJson, error in
@@ -54,11 +50,9 @@ class MainService: NSObject {
                 }else {
                     completion(nil, "sunucuda bir hata olustu.")
                 }
-                
             }else {
                 completion(nil, (error?.localizedDescription)!)
             }
-            
         }
     }
     
@@ -75,11 +69,9 @@ class MainService: NSObject {
                 }else {
                     completion(nil, "sunucuda bir hata olustu.")
                 }
-                
             }else {
                 completion(nil, (error?.localizedDescription)!)
             }
-            
         }
     }
     
@@ -96,11 +88,9 @@ class MainService: NSObject {
                 }else {
                     completion(nil, "sunucuda bir hata olustu.")
                 }
-                
             }else {
                 completion(nil, (error?.localizedDescription)!)
             }
-            
         }
     }
     
@@ -117,12 +107,9 @@ class MainService: NSObject {
                 }else {
                     completion(nil, "sunucuda bir hata olustu.")
                 }
-                
             }else {
                 completion(nil, (error?.localizedDescription)!)
             }
-            
         }
     }
-
 }

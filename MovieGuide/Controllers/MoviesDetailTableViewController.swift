@@ -11,10 +11,8 @@ import UIKit
 import PKHUD
 import Kingfisher
 
-
 class MoviesDetailTableViewController: UITableViewController {
-    
-   
+       
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var posterImage: MovieImageView!
     @IBOutlet weak var backPoster: UIImageView!
@@ -35,8 +33,7 @@ class MoviesDetailTableViewController: UITableViewController {
         self.setNeedsStatusBarAppearanceUpdate()
         
         self.navigationController?.navigationBar.isHidden = true
-        getDetails()
-  
+        getDetails(movie?.id ?? 0)
     }
     
     func setUI(){
@@ -47,19 +44,15 @@ class MoviesDetailTableViewController: UITableViewController {
         descriptionLabel.text = movieDetail?.overview
     }
     
-    func getDetails() {
+    func getDetails(_ movieId : Int) {
         PKHUD.sharedHUD.show()
-        MainService.sharedInstance.getMoviesDetail(movie?.id ?? 0, completion: {(moviesResponse, error) in
+        MainService.sharedInstance.getMoviesDetail(movieId, completion: {(moviesResponse, error) in
             PKHUD.sharedHUD.hide()
             if error == nil {
                 self.movieDetail = moviesResponse
                 print("Movie detail ")
             }else {
-                let alert = UIAlertController(title: "HATA", message: error, preferredStyle: UIAlertController.Style.alert)
-                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-                    NSLog("click the 'OK'")
-                }))
-                self.present(alert, animated: true, completion: nil)
+                ViewUtils.showAlert(withController: self, title: "Uyarı", message: "Sunucuda bir hata olustu.")
             }
         })
     }
