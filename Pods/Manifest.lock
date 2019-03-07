@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.7.3)
+  - Cosmos (18.0.1)
   - Kingfisher (4.10.0)
   - ObjectMapper (3.4.2)
   - PKHUD (5.2.1)
@@ -7,6 +8,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.7.3)
+  - Cosmos (~> 18.0)
   - Kingfisher (= 4.10.0)
   - ObjectMapper (~> 3.4)
   - PKHUD (~> 5.1)
@@ -15,6 +17,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - Cosmos
     - Kingfisher
     - ObjectMapper
     - PKHUD
@@ -22,11 +25,12 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  Cosmos: 7dfaa3f52584ca5f94ab74b5c2e264019cc9f7f5
   Kingfisher: 43c4b802d8b5256cf1f4379e9cd10b329be6d3e2
   ObjectMapper: 0d4402610f4e468903ae64629eec4784531e5c51
   PKHUD: 4e6162c4c39ac367c6934e9855c6b4762ee16256
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: e834dc6f21a19235ef60c9595dfe450e6a77232d
+PODFILE CHECKSUM: 0a2c4d59ff17cedefc65cc59c74e9134fd0570a7
 
 COCOAPODS: 1.6.1

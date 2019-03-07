@@ -75,7 +75,7 @@ class MainService: NSObject {
         }
     }
     
-    func getMoviesDetail(_ id: Int, completion: @escaping( _ categoryresponse: MovieDetail?, _ error: String?) -> ()) {
+    func getMoviesDetail(_ id: Int, completion: @escaping( _ _: MovieDetail?, _ error: String?) -> ()) {
         NetworkManager.sharedInstance.request(url: Constants.getPath(path: "movie/\(id)"), method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil) { code, responseJson, error in
             if error == nil {
                 if let json = responseJson {
@@ -94,7 +94,7 @@ class MainService: NSObject {
         }
     }
     
-    func getMoviesDetailForCast(_ id: Int, completion: @escaping( _ categoryresponse: MovieCastDetail?, _ error: String?) -> ()) {
+    func getMoviesDetailForCast(_ id: Int, completion: @escaping(_ _: MovieCastDetail?, _ error: String?) -> ()) {
         NetworkManager.sharedInstance.request(url: Constants.getPath(path: "movie/\(id)/credits"), method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil) { code, responseJson, error in
             if error == nil {
                 if let json = responseJson {
