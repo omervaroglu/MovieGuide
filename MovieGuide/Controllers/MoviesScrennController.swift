@@ -33,11 +33,7 @@ class MoviesScreenController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getMoviesList()
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        
-    }
-    
+    }    
     func getMoviesList() {
         PKHUD.sharedHUD.show()
         MainService.sharedInstance.getTopRatedMovies(completion: {(moviesResponse, error) in
@@ -179,8 +175,8 @@ extension MoviesScreenController: UICollectionViewDelegate, UICollectionViewData
             
         case 2:
             
-            collectionView.register(UINib(nibName: "PopularMoviesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PopularMoviesCollectionCell")
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularMoviesCollectionCell", for: indexPath) as! PopularMoviesCollectionViewCell
+            collectionView.register(UINib(nibName: "PopularMoviesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PopularMoviesCollectionViewCell")
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularMoviesCollectionViewCell", for: indexPath) as! PopularMoviesCollectionViewCell
             
             cell.popularCollectionImageView.kf.setImage(with: URL(string: Constants.imageUrl+nowPlayingMovies[indexPath.row].poster_path!), placeholder: nil, options: [.cacheOriginalImage], progressBlock: nil, completionHandler: nil)
             cell.popularCollectionLabel.text = nowPlayingMovies[indexPath.row].title
@@ -188,8 +184,8 @@ extension MoviesScreenController: UICollectionViewDelegate, UICollectionViewData
             return cell
         
         case 3 :
-            collectionView.register(UINib(nibName: "PopularMoviesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PopularMoviesCollectionCell")
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularMoviesCollectionCell", for: indexPath) as! PopularMoviesCollectionViewCell
+            collectionView.register(UINib(nibName: "PopularMoviesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PopularMoviesCollectionViewCell")
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularMoviesCollectionViewCell", for: indexPath) as! PopularMoviesCollectionViewCell
             
             cell.popularCollectionImageView.kf.setImage(with: URL(string: Constants.imageUrl+popularMovies[indexPath.row].poster_path!), placeholder: nil, options: [.cacheOriginalImage], progressBlock: nil, completionHandler: nil)
             cell.popularCollectionLabel.text = popularMovies[indexPath.row].title

@@ -80,7 +80,7 @@ class MainService: NSObject {
             if error == nil {
                 if let json = responseJson {
                     let response = Mapper<MovieDetail>().map(JSONObject: json.dictionaryObject)
-                    if let response = response, response != nil {
+                    if let response = response, response.id == id { // nil sorgusu yapabilmek icin jsondan gelen idleri karsilastirdim
                         completion(response, nil)
                     }else {
                         completion(nil, "sunucuda bir hata olustu")
@@ -99,7 +99,7 @@ class MainService: NSObject {
             if error == nil {
                 if let json = responseJson {
                     let response = Mapper<MovieCastDetail>().map(JSONObject: json.dictionaryObject)
-                    if let response = response, response != nil  {
+                    if let response = response, response.id == id   { // nil sorgusu yapabilmek icin jsondan gelen idleri karsilastirdim
                         completion(response, nil)
                     }else {
                         completion(nil, "sunucuda bir hata olustu")

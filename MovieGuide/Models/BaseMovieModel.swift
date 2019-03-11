@@ -31,5 +31,4 @@ struct BaseMovieModel : Mappable {
 		total_pages <- map["total_pages"]
 		movies <- map["results"]
 	}
-
 }
