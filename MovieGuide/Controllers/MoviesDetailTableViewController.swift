@@ -12,6 +12,7 @@ import PKHUD
 import Kingfisher
 import Cosmos
 import CoreImage
+import AVKit
 
 class MoviesDetailTableViewController: UITableViewController {
        
@@ -25,6 +26,7 @@ class MoviesDetailTableViewController: UITableViewController {
     @IBOutlet weak var rateLabel: UILabel!
     @IBOutlet weak var castCollectionView: UICollectionView!
     
+
     var movie: Movie?
     var movieDetail: MovieDetail?{
         didSet{
@@ -65,8 +67,24 @@ class MoviesDetailTableViewController: UITableViewController {
         self.navigationController?.popToRootViewController(animated: true)
     }
     
+    @IBAction func playButton(_ sender: Any) {
+        
+    }
+    
+    
     func setUI(){
-        backPoster.kf.setImage(with: URL(string: Constants.imageUrl + (movieDetail?.backdrop_path)!), placeholder: nil, options: [.cacheOriginalImage], progressBlock: nil, completionHandler: nil)
+        backPoster.kf.setImage(with: URL(string: Constants.imageUrl + (movieDetail?.backdrop_path)!), placeholder: nil, options: [.cacheOriginalImage], progressBlock: nil) { image, _, _, _ in
+            if image == nil {
+                self.backPoster.image = UIImage(named: "profile")
+            }
+            self.titleLabel.textColor = self.backPoster.image?.averageColor!.realInverse()
+            self.castCollectionView.backgroundColor = .white
+            self.view.backgroundColor = .white
+            self.descriptionLabel.textColor = self.backPoster.image?.averageColor!.realInverse()
+            self.rateLabel.textColor = self.backPoster.image?.averageColor!.realInverse()
+            self.kindOfMovieLabel.textColor = self.backPoster.image?.averageColor!.realInverse()
+       
+        }
         
         posterImage.kf.setImage(with: URL(string: Constants.imageUrl + (movieDetail?.poster_path)!), placeholder: nil, options: [.cacheOriginalImage] , progressBlock: nil, completionHandler: nil)
         
@@ -100,39 +118,6 @@ class MoviesDetailTableViewController: UITableViewController {
             }
         })
     }
-    func fastColorAvg(_ inputImage: CIImage) -> UIColor? {
-        
-        guard let avgFilter = CIFilter(name: "CIAreaAverage") else { return nil }
-        avgFilter.setValue(inputImage, forKey: kCIInputImageKey)
-        let imageRect = inputImage.extent
-        avgFilter.setValue(CIVector(cgRect: imageRect), forKey: kCIInputExtentKey)
-        let newImage = UIImage(ciImage: avgFilter.outputImage!)
-        let newCol = extractColor(newImage)
-        return newCol
-    }
-    
-    
-    func extractColor(_ theImage: UIImage) -> UIColor? {
-        var pixel = Pixel(red: 0, green: 0, blue: 0, alpha: 0)
-        if let imageData = theImage.tiffRepresentation {
-            guard let source = CGImageSourceCreateWithData(imageData as CFData, nil) else { return nil }
-            let maskRef = CGImageSourceCreateImageAtIndex(source, 0, nil)
-            let colorSpace = CGColorSpaceCreateDeviceRGB()
-            //            var bitmapInfo = CGBitmapInfo.ByteOrder32Big.union(CGBitmapInfo(rawValue: CGImageAlphaInfo.PremultipliedLast.rawValue))
-            let context = CGContext(data: &pixel, width: 1, height: 1, bitsPerComponent: 8, bytesPerRow: 4, space: colorSpace, bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)
-            
-            context?.draw(maskRef!, in: CGRect(x: 0, y: 0,width: 1,height: 1))
-            //            context?.draw(in: CGRect(x: 0, y: 0,width: 1,height: 1),image: maskRef!)
-            let r = CGFloat(pixel.red) / CGFloat(255.0)
-            let g = CGFloat(pixel.green) / CGFloat(255.0)
-            let b = CGFloat(pixel.blue) / CGFloat(255.0)
-            let a = CGFloat(pixel.alpha) / CGFloat(255.0)
-            return UIColor(calibratedRed: r, green: g, blue: b, alpha: a)
-        }
-        return nil
-    }
-    
-    
 }
 
 extension MoviesDetailTableViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -147,14 +132,20 @@ extension MoviesDetailTableViewController : UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         collectionView.register(UINib(nibName: "CastCollectionCell", bundle: nil), forCellWithReuseIdentifier: "CastCollectionCell")
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CastCollectionCell", for: indexPath) as! CastCollectionCell
-            
+        
+        if let image = backPoster.image {
+            cell.CastView.backgroundColor = image.averageColor?.inverse()
+        }
+        
         cell.CastCollectionImageView.kf.setImage(with: URL(string: Constants.imageUrl+(moviesCast[indexPath.row].profile_path ?? "")), placeholder: nil, options: [.cacheOriginalImage], progressBlock: nil){ (image, _, _, _) in
             if image == nil {
                 cell.CastCollectionImageView.image = UIImage(named: "profile")
             }
         }
-            cell.CastCollectionNameLabel.text = self.moviesCast[indexPath.row].name ?? ""
-            return cell
+        cell.CastCollectionNameLabel.text = self.moviesCast[indexPath.row].name ?? ""
+        cell.CastCollectionNameLabel.textColor = self.backPoster.image?.averageColor!.realInverse()
+        //self.castCollectionView.reloadItems(at: [indexPath])
+        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) ->
@@ -163,5 +154,45 @@ extension MoviesDetailTableViewController : UICollectionViewDelegate, UICollecti
                 let height = collectionView.frame.height-8
                 return CGSize(width: width, height: height)
     }
+}
+
+extension UIImage {
     
+    var averageColor: UIColor? {
+        guard let inputImage = self.ciImage ?? CIImage(image: self) else { return nil }
+        guard let filter = CIFilter(name: "CIAreaAverage", parameters: [kCIInputImageKey: inputImage, kCIInputExtentKey: CIVector(cgRect: inputImage.extent)])
+            else { return nil }
+        guard let outputImage = filter.outputImage else { return nil }
+        
+        var bitmap = [UInt8](repeating: 0, count: 4)
+        let context = CIContext(options: [CIContextOption.workingColorSpace : kCFNull])
+        let outputImageRect = CGRect(x: 0, y: 0, width: 1, height: 1)
+        
+        context.render(outputImage, toBitmap: &bitmap, rowBytes: 4, bounds: outputImageRect, format: CIFormat.RGBA8, colorSpace: nil)
+        
+        return UIColor(red: CGFloat(bitmap[0]) / 255, green: CGFloat(bitmap[1]) / 255, blue: CGFloat(bitmap[2]) / 255, alpha: CGFloat(bitmap[3]) / 255)
+    }
+}
+extension UIColor {
+    func inverse () -> UIColor {
+        var r:CGFloat = 0.0; var g:CGFloat = 0.0; var b:CGFloat = 0.0; var a:CGFloat = 5.0;
+        if self.getRed(&r, green: &g, blue: &b, alpha: &a) {
+            if r < 0.6 && g < 0.6 && b < 0.6 { // renk siyaha yakinsa beyaz gondermesi icin
+                return UIColor(red: 1, green: 1, blue: 1, alpha: a)
+            }// aksi halde zit rengini alacak
+            if r > 0.4 && g > 0.4 && b > 0.4 { // renk beyaza yakinsa siyah gondermesi icin
+                return UIColor(red: 0, green: 0, blue: 0, alpha: a)
+            }// aksi halde zit rengini alacak
+            return UIColor(red: (1.0-r), green: (1.0 - g), blue: (1.0 - b), alpha: a)
+        }
+        return .black // Return a default colour
+    }
+    
+    func realInverse () -> UIColor {
+        var r:CGFloat = 0.0; var g:CGFloat = 0.0; var b:CGFloat = 0.0; var a:CGFloat = 0.0;
+        if self.getRed(&r, green: &g, blue: &b, alpha: &a) {
+            return UIColor(red: (1.0-r), green: (1.0 - g), blue: (1.0 - b), alpha: a)
+        }
+        return .black // Return a default colour
+    }
 }

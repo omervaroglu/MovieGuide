@@ -18,6 +18,7 @@ class MainService: NSObject {
         return instance
     }()
     
+    // movies icin gerekli servisler
     func getTopRatedMovies( completion: @escaping( _ categoryresponse: BaseMovieModel?, _ error: String?) -> ()) {
         NetworkManager.sharedInstance.request(url: Constants.getPath(path: "movie/top_rated"), method: .post, parameters: nil, encoding: JSONEncoding.default, headers: nil) { code, responseJson, error in
             if error == nil {
@@ -100,6 +101,44 @@ class MainService: NSObject {
                 if let json = responseJson {
                     let response = Mapper<MovieCastDetail>().map(JSONObject: json.dictionaryObject)
                     if let response = response, response.id == id   { // nil sorgusu yapabilmek icin jsondan gelen idleri karsilastirdim
+                        completion(response, nil)
+                    }else {
+                        completion(nil, "sunucuda bir hata olustu")
+                    }
+                }else {
+                    completion(nil, "sunucuda bir hata olustu.")
+                }
+            }else {
+                completion(nil, (error?.localizedDescription)!)
+            }
+        }
+    }
+    //------------------------
+    //TV icin gerekli servisler
+    func getTopRatedTv( completion: @escaping( _ categoryresponse: BaseTvModel?, _ error: String?) -> ()) {
+        NetworkManager.sharedInstance.request(url: Constants.getPath(path: "tv/top_rated"), method: .post, parameters: nil, encoding: JSONEncoding.default, headers: nil) { code, responseJson, error in
+            if error == nil {
+                if let json = responseJson {
+                    let response = Mapper<BaseTvModel>().map(JSONObject: json.dictionaryObject)
+                    if let response = response, response.page == 1 {
+                        completion(response, nil)
+                    }else {
+                        completion(nil, "sunucuda bir hata olustu")
+                    }
+                }else {
+                    completion(nil, "sunucuda bir hata olustu.")
+                }
+            }else {
+                completion(nil, (error?.localizedDescription)!)
+            }
+        }
+    }
+    func getPopularTv( completion: @escaping( _ categoryresponse: BaseTvModel?, _ error: String?) -> ()) {
+        NetworkManager.sharedInstance.request(url: Constants.getPath(path: "tv/popular"), method: .post, parameters: nil, encoding: JSONEncoding.default, headers: nil) { code, responseJson, error in
+            if error == nil {
+                if let json = responseJson {
+                    let response = Mapper<BaseTvModel>().map(JSONObject: json.dictionaryObject)
+                    if let response = response, response.page == 1 {
                         completion(response, nil)
                     }else {
                         completion(nil, "sunucuda bir hata olustu")

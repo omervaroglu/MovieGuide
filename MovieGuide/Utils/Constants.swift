@@ -13,6 +13,7 @@ import UIKit
     
     static let baseUrl = "https://api.themoviedb.org/3/"
     static let imageUrl = "https://image.tmdb.org/t/p/w500"
+    static let tvImageUrl = "https://image.tmdb.org/t/p/w300"
     
     static let apiKey = "f7dea668cf80a25035af6e29f6e05c5e"
     

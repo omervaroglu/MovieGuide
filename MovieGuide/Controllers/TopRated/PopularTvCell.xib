@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="center" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PopularTvCell" rowHeight="258" id="AZo-57-hYZ" customClass="PopularTvCell" customModule="MovieGuide" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="392" height="276"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="AZo-57-hYZ" id="MTV-48-cEv" customClass="PopularTvCell" customModule="MovieGuide" customModuleProvider="target">
+                <rect key="frame" x="0.0" y="0.0" width="392" height="275.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4bg-Hk-4x8">
+                        <rect key="frame" x="0.0" y="0.0" width="392" height="275.5"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f93-1o-RAe" customClass="MovieImageView" customModule="MovieGuide" customModuleProvider="target">
+                                <rect key="frame" x="16" y="16" width="360" height="216"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="f93-1o-RAe" secondAttribute="height" multiplier="5:3" id="Vd6-HN-yby"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1RT-TF-hVW">
+                                <rect key="frame" x="16" y="248" width="360" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="dWX-8C-V4I"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="f93-1o-RAe" firstAttribute="top" secondItem="4bg-Hk-4x8" secondAttribute="top" constant="16" id="Ghk-bR-kBa"/>
+                            <constraint firstItem="f93-1o-RAe" firstAttribute="leading" secondItem="4bg-Hk-4x8" secondAttribute="leading" constant="16" id="N4c-qE-wtZ"/>
+                            <constraint firstItem="1RT-TF-hVW" firstAttribute="leading" secondItem="f93-1o-RAe" secondAttribute="leading" id="k1E-or-ymn"/>
+                            <constraint firstItem="1RT-TF-hVW" firstAttribute="trailing" secondItem="f93-1o-RAe" secondAttribute="trailing" id="mkc-Sz-G26"/>
+                            <constraint firstItem="1RT-TF-hVW" firstAttribute="top" secondItem="f93-1o-RAe" secondAttribute="bottom" constant="16" id="ueQ-Ao-vv2"/>
+                            <constraint firstAttribute="trailing" secondItem="f93-1o-RAe" secondAttribute="trailing" constant="16" id="yni-kH-XUM"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="4bg-Hk-4x8" firstAttribute="leading" secondItem="MTV-48-cEv" secondAttribute="leading" id="8fs-hd-SWd"/>
+                    <constraint firstAttribute="bottom" secondItem="4bg-Hk-4x8" secondAttribute="bottom" id="PcN-Az-8WJ"/>
+                    <constraint firstItem="4bg-Hk-4x8" firstAttribute="top" secondItem="MTV-48-cEv" secondAttribute="top" id="Q4v-IR-HxP"/>
+                    <constraint firstAttribute="trailing" secondItem="4bg-Hk-4x8" secondAttribute="trailing" id="lbH-YK-I9f"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="cellView" destination="4bg-Hk-4x8" id="FGi-kT-KDE"/>
+                <outlet property="nameLabel" destination="1RT-TF-hVW" id="9xn-Jk-3we"/>
+                <outlet property="popularTvImage" destination="f93-1o-RAe" id="X2o-0I-aZ5"/>
+            </connections>
+            <point key="canvasLocation" x="115.2" y="90.854572713643179"/>
+        </tableViewCell>
+    </objects>
+</document>
