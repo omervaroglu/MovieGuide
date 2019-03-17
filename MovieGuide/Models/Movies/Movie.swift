@@ -29,6 +29,8 @@ struct Movie : Mappable {
 	var adult : Bool?
 	var overview : String?
 	var release_date : String?
+    
+    var isMovie: Bool = true
 
 	init?(map: Map) {
 
@@ -51,5 +53,11 @@ struct Movie : Mappable {
 		overview <- map["overview"]
 		release_date <- map["release_date"]
 	}
+    
+    init(tv: Tv) {
+        self.id = tv.id
+        self.isMovie = false
+        
+    }
 
 }

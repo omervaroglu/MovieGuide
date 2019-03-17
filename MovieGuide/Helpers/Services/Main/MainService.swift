@@ -76,8 +76,11 @@ class MainService: NSObject {
         }
     }
     
-    func getMoviesDetail(_ id: Int, completion: @escaping( _ _: MovieDetail?, _ error: String?) -> ()) {
-        NetworkManager.sharedInstance.request(url: Constants.getPath(path: "movie/\(id)"), method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil) { code, responseJson, error in
+    func getMoviesDetail(_ isMovie: Bool, _ id: Int, completion: @escaping( _ _: MovieDetail?, _ error: String?) -> ()) {
+        //true veya false oldugunu karsilastirdigimiz minik kod
+        let path: String = isMovie ? Constants.getPath(path: "movie/\(id)") : Constants.getPath(path: "tv/\(id)")
+        
+        NetworkManager.sharedInstance.request(url: path, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil) { code, responseJson, error in
             if error == nil {
                 if let json = responseJson {
                     let response = Mapper<MovieDetail>().map(JSONObject: json.dictionaryObject)

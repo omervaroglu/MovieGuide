@@ -13,6 +13,7 @@ import Kingfisher
 import Cosmos
 import CoreImage
 import AVKit
+import CoreData
 
 class MoviesDetailTableViewController: UITableViewController {
        
@@ -52,6 +53,10 @@ class MoviesDetailTableViewController: UITableViewController {
             castCollectionView.reloadData()
         }
     }
+    var favMovei : [Movie] = []
+    var favTv : [Movie] = []
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -60,17 +65,22 @@ class MoviesDetailTableViewController: UITableViewController {
         self.setNeedsStatusBarAppearanceUpdate()
         
         self.navigationController?.navigationBar.isHidden = true
-        getDetails(movie?.id ?? 0)
+        getDetails(movie!.isMovie ,(movie?.id ?? 0))
 }
     
     @IBAction func backButton(_ sender: Any) {
         self.navigationController?.popToRootViewController(animated: true)
     }
-    
-    @IBAction func playButton(_ sender: Any) {
-        
+    @IBAction func favouriteButton(_ sender: UIButton) {
+        if movie?.isMovie == true {
+            self.favMovei.append(movie!)
+        } else {
+            self.favTv.append(movie!)
+        }
+        print(favTv.count)
+        sender.setBackgroundImage(UIImage(named: "icStarSelected"), for: .normal)
+        print("favori tik.")
     }
-    
     
     func setUI(){
         backPoster.kf.setImage(with: URL(string: Constants.imageUrl + (movieDetail?.backdrop_path)!), placeholder: nil, options: [.cacheOriginalImage], progressBlock: nil) { image, _, _, _ in
@@ -95,9 +105,9 @@ class MoviesDetailTableViewController: UITableViewController {
         cosmosView.settings.fillMode = .precise
     }
     
-    func getDetails(_ movieId : Int) {
+    func getDetails(_ isMovie: Bool, _ movieId : Int) {
         PKHUD.sharedHUD.show()
-        MainService.sharedInstance.getMoviesDetail(movieId, completion: {(moviesResponse, error) in
+        MainService.sharedInstance.getMoviesDetail(isMovie, movieId, completion: {(moviesResponse, error) in
             PKHUD.sharedHUD.hide()
             if error == nil {
                 self.movieDetail = moviesResponse

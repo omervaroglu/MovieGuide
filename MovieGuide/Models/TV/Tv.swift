@@ -28,7 +28,7 @@ struct Tv : Mappable {
 	var vote_average : Double?
 	var overview : String?
 	var poster_path : String?
-
+    
 	init?(map: Map) {
 
 	}
