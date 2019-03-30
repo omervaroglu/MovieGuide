@@ -31,7 +31,7 @@ struct Movie : Mappable {
 	var release_date : String?
     
     var isMovie: Bool = true
-
+    var isSelected: Bool?
 	init?(map: Map) {
 
 	}
@@ -57,7 +57,6 @@ struct Movie : Mappable {
     init(tv: Tv) {
         self.id = tv.id
         self.isMovie = false
-        
     }
 
 }

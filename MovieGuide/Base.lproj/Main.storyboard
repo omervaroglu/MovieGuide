@@ -160,12 +160,12 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ggE-WW-Xtr">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ggE-WW-Xtr">
                                     <rect key="frame" x="174" y="294" width="185" height="43"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4bZ-oh-arL" customClass="CosmosView" customModule="Cosmos">
+                                <view userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4bZ-oh-arL" customClass="CosmosView" customModule="Cosmos">
                                     <rect key="frame" x="232" y="353" width="127" height="29"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <userDefinedRuntimeAttributes>
@@ -180,7 +180,7 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </view>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ADZ-nF-YzT">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ADZ-nF-YzT">
                                     <rect key="frame" x="174" y="353" width="42" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
@@ -306,6 +306,7 @@
                         <outlet property="castCollectionView" destination="2Li-1h-LeI" id="2xL-Yj-B4e"/>
                         <outlet property="cosmosView" destination="4bZ-oh-arL" id="CmD-IQ-IuP"/>
                         <outlet property="descriptionLabel" destination="pOC-aA-B97" id="qKK-ne-CU0"/>
+                        <outlet property="favButton" destination="MhD-VI-yf7" id="GGa-GS-lPO"/>
                         <outlet property="kindOfMovieLabel" destination="ggE-WW-Xtr" id="9Jz-Wl-q3e"/>
                         <outlet property="posterImage" destination="Rii-4G-ki6" id="YVX-kS-EMp"/>
                         <outlet property="rateLabel" destination="ADZ-nF-YzT" id="df0-tp-Erc"/>

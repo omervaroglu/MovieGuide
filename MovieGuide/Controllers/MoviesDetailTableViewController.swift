@@ -26,6 +26,7 @@ class MoviesDetailTableViewController: UITableViewController {
     @IBOutlet weak var cosmosView: CosmosView!
     @IBOutlet weak var rateLabel: UILabel!
     @IBOutlet weak var castCollectionView: UICollectionView!
+    @IBOutlet weak var favButton: UIButton!
     
 
     var movie: Movie?
@@ -53,12 +54,20 @@ class MoviesDetailTableViewController: UITableViewController {
             castCollectionView.reloadData()
         }
     }
-    var favMovei : [Movie] = []
-    var favTv : [Movie] = []
+    var favMovei : [Int] = []
+    var favTv : [Int] = []
     
-    
+    var selectedItem : Bool?
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let defaults = UserDefaults.standard
+        if defaults.bool(forKey: "selectedItem") == true {
+            self.favButton.setBackgroundImage(UIImage(named: "icStarSelected"), for: .normal)
+        }else {
+            self.favButton.setBackgroundImage(UIImage(named: "icStar"), for: .normal)
+        }
+
         
         let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
         statusBar?.backgroundColor = UIColor.clear
@@ -66,20 +75,61 @@ class MoviesDetailTableViewController: UITableViewController {
         
         self.navigationController?.navigationBar.isHidden = true
         getDetails(movie!.isMovie ,(movie?.id ?? 0))
-}
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        let defaults = UserDefaults.standard
+        defaults.set(favMovei, forKey: "favMovei")
+        defaults.set(favTv, forKey: "favTv")
+    }
     
     @IBAction func backButton(_ sender: Any) {
         self.navigationController?.popToRootViewController(animated: true)
     }
     @IBAction func favouriteButton(_ sender: UIButton) {
-        if movie?.isMovie == true {
-            self.favMovei.append(movie!)
-        } else {
-            self.favTv.append(movie!)
+        print("tiklandi")
+        let defaults = UserDefaults.standard
+        if defaults.bool(forKey: "selectedItem")  == true {
+            movie?.isSelected = false
+            self.favButton.setBackgroundImage(UIImage(named: "icStar"), for: .normal)
+            if movie?.isMovie == true {
+                self.favMovei.reverse()
+            }else {
+                self.favTv.reverse()
+            }
+        }else {
+            movie?.isSelected = true
+            self.favMovei.append(movie?.id ?? 0)
+            self.favButton.setBackgroundImage(UIImage(named: "icStarSelected"), for: .normal)
+            if movie?.isMovie == true {
+                self.favMovei.append(movie?.id ?? 0)
+            }else {
+                self.favTv.append(movie?.id ?? 0)
+            }
         }
-        print(favTv.count)
-        sender.setBackgroundImage(UIImage(named: "icStarSelected"), for: .normal)
-        print("favori tik.")
+        selectedItem = movie?.isSelected ?? false
+        defaults.set(selectedItem, forKey: "selectedItem")
+        
+        
+//        if movie?.isMovie == true {
+//            self.favMovei.append(movie!)
+//            movie?.isSelected = true
+//            if movie?.isSelected == true {
+//                sender.setBackgroundImage(UIImage(named: "icStarSelected"), for: .normal)
+//            } else {
+//                sender.setBackgroundImage(UIImage(named: "icStar"), for: .normal)
+//                self.favMovei.remove(at: movie?.id ?? 0)
+//            }
+//        } else {
+//            self.favTv.append(movie!)
+//            if movie?.isSelected == true {
+//                sender.setBackgroundImage(UIImage(named: "icStarSelected"), for: .normal)
+//            } else {
+//                sender.setBackgroundImage(UIImage(named: "icStar"), for: .normal)
+//                self.favMovei.reverse()
+//            }
+//        }
+//        print(favTv.count)
+//        print("favori tik.")
     }
     
     func setUI(){
