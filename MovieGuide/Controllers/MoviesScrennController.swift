@@ -25,25 +25,15 @@ class MoviesScreenController: BaseViewController {
             tableView.reloadData()
         }
     }
-    
     var nowPlayingMovies = [Movie]() {
         didSet {
             tableView.reloadData()
         }
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         getMoviesList()
-        
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        
-    }
-    
+    }    
     func getMoviesList() {
         PKHUD.sharedHUD.show()
         MainService.sharedInstance.getTopRatedMovies(completion: {(moviesResponse, error) in
@@ -52,39 +42,25 @@ class MoviesScreenController: BaseViewController {
                 self.topRatedMovies = moviesResponse?.movies ?? []
                 print("topRated")
             }else {
-                let alert = UIAlertController(title: "HATA", message: error, preferredStyle: UIAlertController.Style.alert)
-                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-                    NSLog("click the 'OK'")
-                }))
-                self.present(alert, animated: true, completion: nil)
+                ViewUtils.showAlert(withController: self, title: "Uyarı", message: "Sunucuda bir hata olustu.")
             }
         })
-        
         MainService.sharedInstance.getPopularMovies(completion: {(moviesResponse, error) in
             PKHUD.sharedHUD.hide()
             if error == nil {
                 self.popularMovies = moviesResponse?.movies ?? []
                 print("Popular")
             }else {
-                let alert = UIAlertController(title: "HATA", message: error, preferredStyle: UIAlertController.Style.alert)
-                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-                    NSLog("click the 'OK'")
-                }))
-                self.present(alert, animated: true, completion: nil)
+                ViewUtils.showAlert(withController: self, title: "Uyarı", message: "Sunucuda bir hata olustu.")
             }
-        })
-        
+        })        
         MainService.sharedInstance.getNowPlayingMovies(completion: {(moviesResponse, error) in
             PKHUD.sharedHUD.hide()
             if error == nil {
                 self.nowPlayingMovies = moviesResponse?.movies ?? []
                 print("NowPlaying")
             }else {
-                let alert = UIAlertController(title: "HATA", message: error, preferredStyle: UIAlertController.Style.alert)
-                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-                    NSLog("click the 'OK'")
-                }))
-                self.present(alert, animated: true, completion: nil)
+                ViewUtils.showAlert(withController: self, title: "Uyarı", message: "Sunucuda bir hata olustu.")
             }
         })
     }
@@ -134,10 +110,6 @@ extension MoviesScreenController:  UITableViewDelegate, UITableViewDataSource {
         default:
             return UITableViewCell()
         }
-        
-
-
-    
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -201,11 +173,10 @@ extension MoviesScreenController: UICollectionViewDelegate, UICollectionViewData
             
             return cell
             
-            
         case 2:
             
-            collectionView.register(UINib(nibName: "PopularMoviesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PopularMoviesCollectionCell")
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularMoviesCollectionCell", for: indexPath) as! PopularMoviesCollectionViewCell
+            collectionView.register(UINib(nibName: "PopularMoviesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PopularMoviesCollectionViewCell")
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularMoviesCollectionViewCell", for: indexPath) as! PopularMoviesCollectionViewCell
             
             cell.popularCollectionImageView.kf.setImage(with: URL(string: Constants.imageUrl+nowPlayingMovies[indexPath.row].poster_path!), placeholder: nil, options: [.cacheOriginalImage], progressBlock: nil, completionHandler: nil)
             cell.popularCollectionLabel.text = nowPlayingMovies[indexPath.row].title
@@ -213,8 +184,8 @@ extension MoviesScreenController: UICollectionViewDelegate, UICollectionViewData
             return cell
         
         case 3 :
-            collectionView.register(UINib(nibName: "PopularMoviesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PopularMoviesCollectionCell")
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularMoviesCollectionCell", for: indexPath) as! PopularMoviesCollectionViewCell
+            collectionView.register(UINib(nibName: "PopularMoviesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PopularMoviesCollectionViewCell")
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularMoviesCollectionViewCell", for: indexPath) as! PopularMoviesCollectionViewCell
             
             cell.popularCollectionImageView.kf.setImage(with: URL(string: Constants.imageUrl+popularMovies[indexPath.row].poster_path!), placeholder: nil, options: [.cacheOriginalImage], progressBlock: nil, completionHandler: nil)
             cell.popularCollectionLabel.text = popularMovies[indexPath.row].title
@@ -224,8 +195,8 @@ extension MoviesScreenController: UICollectionViewDelegate, UICollectionViewData
         default:
             return UICollectionViewCell()
         }
-
     }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) ->
         CGSize {
             switch collectionView.tag {
@@ -246,7 +217,6 @@ extension MoviesScreenController: UICollectionViewDelegate, UICollectionViewData
                 let width = self.view.frame.width*2/5
                 let height = width*3/2 + 72
                 return CGSize(width: width, height: height)
-
             }
     }
     
@@ -263,6 +233,5 @@ extension MoviesScreenController: UICollectionViewDelegate, UICollectionViewData
             break
         }
         self.navigationController?.pushViewController(vc, animated: true)
-
     }
 }

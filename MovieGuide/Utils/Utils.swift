@@ -25,5 +25,4 @@ class Utils {
     static func getAuthorizationKey() -> String {
         return UserDefaults.standard.string(forKey: "registrationSecret") ?? ""
     }
-    
 }

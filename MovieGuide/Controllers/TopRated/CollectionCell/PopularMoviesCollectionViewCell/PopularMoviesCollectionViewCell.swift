@@ -1,5 +1,5 @@
 //
-//  PopularMoviesCollectionCell.swift
+//  PopularMoviesCollectionViewCell.swift
 //  MovieGuide
 //
 //  Created by Omer  on 28.02.2019.

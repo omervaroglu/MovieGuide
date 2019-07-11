@@ -14,11 +14,11 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct BaseMovieModel : Mappable {
+struct BaseTvModel : Mappable {
 	var page : Int?
 	var total_results : Int?
 	var total_pages : Int?
-	var movies : [Movie]?
+	var tvs : [Tv]?
 
 	init?(map: Map) {
 
@@ -29,7 +29,7 @@ struct BaseMovieModel : Mappable {
 		page <- map["page"]
 		total_results <- map["total_results"]
 		total_pages <- map["total_pages"]
-		movies <- map["results"]
+		tvs <- map["results"]
 	}
 
 }
