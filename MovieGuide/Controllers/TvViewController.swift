@@ -130,19 +130,11 @@ extension TvViewController: UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        switch section {
-//        case 0:
-//            return popularTv.count
-//        case 1:
-            return topRatedTv.count
-//        default:
-//            return 1
-//        }
+        return topRatedTv.count
+
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        switch collectionView.tag {
-//        case 0:
             collectionView.register(UINib(nibName: "PopularMoviesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PopularMoviesCollectionViewCell")
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularMoviesCollectionViewCell", for: indexPath) as! PopularMoviesCollectionViewCell
             
@@ -150,38 +142,13 @@ extension TvViewController: UICollectionViewDelegate, UICollectionViewDataSource
             cell.popularCollectionLabel.text = topRatedTv[indexPath.row].name
             
             return cell
-//        case 1:
-//            collectionView.register(UINib(nibName: "TopRatedCollectionCell", bundle: nil), forCellWithReuseIdentifier: "TopRatedCollectionCell")
-//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TopRatedCollectionCell", for: indexPath) as! TopRatedCollectionCell
-//
-//            cell.collectionViewImage.kf.setImage(with: URL(string: Constants.imageUrl+topRatedTv[indexPath.row].backdrop_path!), placeholder: nil, options: [.cacheOriginalImage], progressBlock: nil, completionHandler: nil)
-//
-//            //burasi scrollu degistirdigimiz yer
-//            if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-//                layout.scrollDirection = .vertical
-//            }
-//            //
-//            return cell
-//        default:
-//            return UICollectionViewCell()
-//        }
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) ->
         CGSize {
-////            switch collectionView.tag {
-////            case 1:
-//                let width = self.view.frame.width-60
-//                let height = width*281/500
-//                return CGSize(width: width+16, height: height)
-////            case 0:
-                let width = self.view.frame.width*2/5
-                let height = width*2 + 72
-                return CGSize(width: width, height: height)
-////            default:
-////                let width = self.view.frame.width*2/5
-////                let height = width*3/2 + 72
-////                return CGSize(width: width, height: height)
-//            }
+            let width = self.view.frame.width*2/5
+            let height = width*2 + 72
+            return CGSize(width: width, height: height)
+
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

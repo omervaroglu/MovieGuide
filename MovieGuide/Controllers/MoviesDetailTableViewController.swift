@@ -58,6 +58,7 @@ class MoviesDetailTableViewController: UITableViewController {
     var favTv : [Int] = []
     
     var selectedItem : Bool?
+    let defaults = UserDefaults.standard
  
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,16 +69,14 @@ class MoviesDetailTableViewController: UITableViewController {
             self.favButton.setBackgroundImage(UIImage(named: "icStar"), for: .normal)
         }
 
-        
         let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
         statusBar?.backgroundColor = UIColor.clear
         self.setNeedsStatusBarAppearanceUpdate()
         
         self.navigationController?.navigationBar.isHidden = true
         getDetails(movie!.isMovie ,(movie?.id ?? 0))
-    }
+        }
     override func viewDidDisappear(_ animated: Bool) {
-        let defaults = UserDefaults.standard
         defaults.set(favMovei, forKey: "favMovei")
         defaults.set(favTv, forKey: "favTv")
     }
@@ -86,28 +85,35 @@ class MoviesDetailTableViewController: UITableViewController {
         self.navigationController?.popToRootViewController(animated: true)
     }
     @IBAction func favouriteButton(_ sender: UIButton) {
-        print("tiklandi")
-        let defaults = UserDefaults.standard
-        if defaults.bool(forKey: "selectedItem")  == true {
-            movie?.isSelected = false
-            self.favButton.setBackgroundImage(UIImage(named: "icStar"), for: .normal)
-            if movie?.isMovie == true {
-                self.favMovei.reverse()
-            }else {
-                self.favTv.reverse()
-            }
-        }else {
-            movie?.isSelected = true
-            self.favMovei.append(movie?.id ?? 0)
-            self.favButton.setBackgroundImage(UIImage(named: "icStarSelected"), for: .normal)
-            if movie?.isMovie == true {
-                self.favMovei.append(movie?.id ?? 0)
-            }else {
-                self.favTv.append(movie?.id ?? 0)
-            }
-        }
         selectedItem = movie?.isSelected ?? false
         defaults.set(selectedItem, forKey: "selectedItem")
+    
+        
+        
+//        if defaults.bool(forKey: "selectedItem"){
+//            movie?.isSelected = false
+//            for movie in favMovei {
+//                if movie == self.movieDetail?.id {
+//                    self.favButton.setBackgroundImage(UIImage(named: "icStar"), for: .normal)
+//                }
+//            }
+//            if movie!.isMovie {
+//                self.favMovei.reverse()
+//            }else {
+//                self.favTv.reverse()
+//            }
+//        } else {
+//            movie?.isSelected = true
+//            //self.favMovei.append(movieDetail?.id ?? 0)
+//            self.favButton.setBackgroundImage(UIImage(named: "icStarSelected"), for: .normal)
+//            if movie!.isMovie {
+//                self.favMovei.append(movieDetail?.id ?? 0)
+//            }else {
+//                self.favTv.append(movieDetail?.id ?? 0)
+//            }
+//        }
+//        selectedItem = movie?.isSelected ?? false
+//        defaults.set(selectedItem, forKey: "selectedItem")
         
         
 //        if movie?.isMovie == true {
@@ -131,7 +137,8 @@ class MoviesDetailTableViewController: UITableViewController {
 //        print(favTv.count)
 //        print("favori tik.")
     }
-    
+
+
     func setUI(){
         backPoster.kf.setImage(with: URL(string: Constants.imageUrl + (movieDetail?.backdrop_path)!), placeholder: nil, options: [.cacheOriginalImage], progressBlock: nil) { image, _, _, _ in
             if image == nil {
@@ -161,7 +168,7 @@ class MoviesDetailTableViewController: UITableViewController {
             PKHUD.sharedHUD.hide()
             if error == nil {
                 self.movieDetail = moviesResponse
-                print("Movie detail ")
+                print("Movie detail")
             }else {
                 ViewUtils.showAlert(withController: self, title: "Uyarı", message: "Sunucuda bir hata olustu.")
             }
@@ -172,7 +179,7 @@ class MoviesDetailTableViewController: UITableViewController {
             PKHUD.sharedHUD.hide()
             if error == nil {
                 self.moviesCast = moviesResponse?.cast ?? []
-                print("Movie cast ")
+                print("Movie cast")
             }else {
                 ViewUtils.showAlert(withController: self, title: "Uyarı", message: "Sunucuda bir hata olustu.")
             }
