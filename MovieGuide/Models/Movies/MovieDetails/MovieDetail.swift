@@ -40,6 +40,8 @@ struct MovieDetail : Mappable {
 	var video : Bool?
 	var vote_average : Double?
 	var vote_count : Int?
+    
+    var isFavSelected : Bool = false
 
 	init?(map: Map) {
 
