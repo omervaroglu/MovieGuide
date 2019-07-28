@@ -191,7 +191,7 @@ class MoviesDetailTableViewController: UITableViewController {
         do {
             let results = try context.fetch(fetchRequest)
             if results.count > 0 {
-                self.favId = results as! [NSManagedObject] as! [FavID]
+                //self.favId = results as! [NSManagedObject] as! [FavID]
             }
         } catch  {
         }
