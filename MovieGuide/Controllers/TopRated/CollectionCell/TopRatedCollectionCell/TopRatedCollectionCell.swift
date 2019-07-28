@@ -11,7 +11,6 @@ import UIKit
 
 class TopRatedCollectionCell: UICollectionViewCell {
     
-    
     @IBOutlet weak var collectionViewImage: MovieImageView!
     
 }
