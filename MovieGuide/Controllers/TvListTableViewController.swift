@@ -25,7 +25,8 @@ class TvListTableViewController : UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //getTvList()
+        navigationController?.isNavigationBarHidden = true
+        getTvList()
     }
     
     func getTvList()  {
@@ -59,12 +60,21 @@ class TvListTableViewController : UITableViewController {
         switch section {
         case 0:
             return 1
-        case 1 :
-            return popularTv.count
         default:
-            return 1
+            return popularTv.count
         }
     }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.section {
+        case 0:
+            return 286
+        default:
+            return 300
+        }
+    }
+    
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
@@ -84,6 +94,26 @@ class TvListTableViewController : UITableViewController {
             return UITableViewCell()
         }
     }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
+        view.backgroundColor = .white
+        let label = UILabel(frame: CGRect(x: 16, y: 10, width: self.view.frame.width-16, height: 40))
+        switch section {
+        case 0:
+            label.text = "Top Rated"
+            break
+        default:
+            label.text = "Popular"
+        }
+        view.addSubview(label)
+        return view
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return section == 1 ? 0 : 50
+    }
+
     
 }
 extension TvListTableViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {

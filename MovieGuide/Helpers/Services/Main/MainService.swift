@@ -118,6 +118,7 @@ class MainService: NSObject {
     }
     //------------------------
     //TV icin gerekli servisler
+
     func getTopRatedTv( completion: @escaping( _ categoryresponse: BaseTvModel?, _ error: String?) -> ()) {
         NetworkManager.sharedInstance.request(url: Constants.getPath(path: "tv/top_rated"), method: .post, parameters: nil, encoding: JSONEncoding.default, headers: nil) { code, responseJson, error in
             if error == nil {

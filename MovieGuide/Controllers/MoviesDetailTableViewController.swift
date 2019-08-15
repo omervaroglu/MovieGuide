@@ -56,18 +56,19 @@ class MoviesDetailTableViewController: UITableViewController {
     }
     var favMovei : [Int] = []
     var favTv : [Int] = []
+    var favId : [Int]?
     
     var selectedItem : Bool?
     let defaults = UserDefaults.standard
  
     override func viewDidLoad() {
         super.viewDidLoad()
-        let defaults = UserDefaults.standard
-        if defaults.bool(forKey: "selectedItem") == true {
-            self.favButton.setBackgroundImage(UIImage(named: "icStarSelected"), for: .normal)
-        }else {
-            self.favButton.setBackgroundImage(UIImage(named: "icStar"), for: .normal)
-        }
+//        let defaults = UserDefaults.standard
+//        if defaults.bool(forKey: "selectedItem") == true {
+//            self.favButton.setBackgroundImage(UIImage(named: "icStarSelected"), for: .normal)
+//        }else {
+//            self.favButton.setBackgroundImage(UIImage(named: "icStar"), for: .normal)
+//        }
 
         let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
         statusBar?.backgroundColor = UIColor.clear
@@ -76,66 +77,19 @@ class MoviesDetailTableViewController: UITableViewController {
         self.navigationController?.navigationBar.isHidden = true
         getDetails(movie!.isMovie ,(movie?.id ?? 0))
         }
-    override func viewDidDisappear(_ animated: Bool) {
-        defaults.set(favMovei, forKey: "favMovei")
-        defaults.set(favTv, forKey: "favTv")
-    }
     
     @IBAction func backButton(_ sender: Any) {
         self.navigationController?.popToRootViewController(animated: true)
     }
     @IBAction func favouriteButton(_ sender: UIButton) {
-        selectedItem = movie?.isSelected ?? false
-        defaults.set(selectedItem, forKey: "selectedItem")
-    
-        
-        
-//        if defaults.bool(forKey: "selectedItem"){
-//            movie?.isSelected = false
-//            for movie in favMovei {
-//                if movie == self.movieDetail?.id {
-//                    self.favButton.setBackgroundImage(UIImage(named: "icStar"), for: .normal)
-//                }
-//            }
-//            if movie!.isMovie {
-//                self.favMovei.reverse()
-//            }else {
-//                self.favTv.reverse()
-//            }
-//        } else {
-//            movie?.isSelected = true
-//            //self.favMovei.append(movieDetail?.id ?? 0)
-//            self.favButton.setBackgroundImage(UIImage(named: "icStarSelected"), for: .normal)
-//            if movie!.isMovie {
-//                self.favMovei.append(movieDetail?.id ?? 0)
-//            }else {
-//                self.favTv.append(movieDetail?.id ?? 0)
-//            }
-//        }
-//        selectedItem = movie?.isSelected ?? false
-//        defaults.set(selectedItem, forKey: "selectedItem")
-        
-        
-//        if movie?.isMovie == true {
-//            self.favMovei.append(movie!)
-//            movie?.isSelected = true
-//            if movie?.isSelected == true {
-//                sender.setBackgroundImage(UIImage(named: "icStarSelected"), for: .normal)
-//            } else {
-//                sender.setBackgroundImage(UIImage(named: "icStar"), for: .normal)
-//                self.favMovei.remove(at: movie?.id ?? 0)
-//            }
-//        } else {
-//            self.favTv.append(movie!)
-//            if movie?.isSelected == true {
-//                sender.setBackgroundImage(UIImage(named: "icStarSelected"), for: .normal)
-//            } else {
-//                sender.setBackgroundImage(UIImage(named: "icStar"), for: .normal)
-//                self.favMovei.reverse()
-//            }
-//        }
-//        print(favTv.count)
-//        print("favori tik.")
+        if movieDetail?.isFavSelected ?? true {
+            movieDetail?.isFavSelected = false
+            self.favButton.setBackgroundImage(UIImage(named: "icStar"), for: .normal)
+        } else {
+            movieDetail?.isFavSelected = true
+            self.favButton.setBackgroundImage(UIImage(named: "icStarSelected"), for: .normal)
+        }
+        saveData()
     }
 
 
@@ -143,6 +97,7 @@ class MoviesDetailTableViewController: UITableViewController {
         backPoster.kf.setImage(with: URL(string: Constants.imageUrl + (movieDetail?.backdrop_path)!), placeholder: nil, options: [.cacheOriginalImage], progressBlock: nil) { image, _, _, _ in
             if image == nil {
                 self.backPoster.image = UIImage(named: "profile")
+                //self.titleLabel.text = "The artist not found"
             }
             self.titleLabel.textColor = self.backPoster.image?.averageColor!.realInverse()
             self.castCollectionView.backgroundColor = .white
@@ -160,6 +115,12 @@ class MoviesDetailTableViewController: UITableViewController {
         rateLabel.text = String(describing: movieDetail?.vote_average ?? 0.0)
         cosmosView.rating = (movieDetail?.vote_average ?? 0.0)/2
         cosmosView.settings.fillMode = .precise
+        
+        if movieDetail?.isFavSelected ?? true {
+            self.favButton.setBackgroundImage(UIImage(named: "icStarSelected"), for: .normal)
+        } else {
+            self.favButton.setBackgroundImage(UIImage(named: "icStar"), for: .normal)
+        }
     }
     
     func getDetails(_ isMovie: Bool, _ movieId : Int) {
@@ -185,6 +146,72 @@ class MoviesDetailTableViewController: UITableViewController {
             }
         })
     }
+    
+    func saveData() {
+        if movieDetail?.isFavSelected ?? true {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let context = appDelegate.persistentContainer.viewContext
+            let favObject = NSEntityDescription.insertNewObject(forEntityName: "FavObject", into: context)
+            
+            favObject.setValue(movieDetail?.id, forKey: "id")
+            favObject.setValue(movieDetail?.original_title, forKey: "original_name")
+            
+            do {
+                try context.save()
+                print("kaydetme basarili")
+            } catch  {
+                print("CoreData Error")
+            }
+        } else {
+            
+        }
+    }
+    
+    func saveID() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let favObject = NSEntityDescription.insertNewObject(forEntityName: "FavID", into: context)
+        
+        favObject.setValue(movieDetail?.id, forKey: "id")
+        
+        do {
+            try context.save()
+            print("kaydetme basarili")
+        } catch  {
+            print("CoreData Error")
+        }
+    }
+    func getID() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavID")
+        fetchRequest.returnsObjectsAsFaults = false
+        
+        do {
+            let results = try context.fetch(fetchRequest)
+            if results.count > 0 {
+                //self.favId = results as! [NSManagedObject] as! [FavID]
+            }
+        } catch  {
+        }
+    }
+    
+//    func getData() {
+//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//        let context = appDelegate.persistentContainer.viewContext
+//
+//        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavObject")
+//        fetchRequest.returnsObjectsAsFaults = false
+//
+//        do {
+//            let results = try context.fetch(fetchRequest)
+//            if results.count > 0 {
+//                self.xx = results as! [NSManagedObject] as! [FavObject]
+//            }
+//        } catch  {
+//        }
+//    }
 }
 
 extension MoviesDetailTableViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {

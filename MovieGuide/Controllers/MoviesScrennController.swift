@@ -33,6 +33,7 @@ class MoviesScreenController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getMoviesList()
+        navigationController?.isNavigationBarHidden = true
     }    
     func getMoviesList() {
         PKHUD.sharedHUD.show()
